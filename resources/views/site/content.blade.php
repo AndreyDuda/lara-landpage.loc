@@ -1,8 +1,8 @@
 @if(isset($pages) && is_object($pages))
 {{--{{ dump($pages) }}--}}
     @foreach($pages as $k=>$page)
-       {{-- @if($k%2 == 0)--}}
-       {{ $page->id }}
+       @if($k%2 == 0)
+       {{-- {{ $page->id }} --}}
            {{-- <section id="home" class="top_cont_outer">
                 <div class="hero_wrapper">
                     <div class="container">
