@@ -7,6 +7,7 @@ use App\Page;
 use App\Portfolio;
 use App\Service;
 use App\People;
+use DB;
 
 class IndexController extends Controller
 {
@@ -17,6 +18,7 @@ class IndexController extends Controller
         $portfolios = Portfolio::all();
         $services = Service::all();
         $peoples = People::all();
+        $filters = DB::table('portfolios')->distinct()->pluck('filter');
 
         $menu = array();
 
@@ -55,11 +57,12 @@ class IndexController extends Controller
         /*dd($menu);*/
 
         return view('site.index',array(
-            'menu' => $menu,
-            'pages' => $page,
-            'services' => $services,
             'portfolios' => $portfolios,
-            'peoples' => $peoples
+            'services'   => $services,
+            'peoples'    => $peoples,
+            'filters'    => $filters,
+            'pages'      => $pages,
+            'menu'       => $menu
         ));
 
     }
