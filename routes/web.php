@@ -23,20 +23,23 @@ Route::group([], function(){
 });
 
 
-/*Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
+Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
 
     Route::get('/', function(){
-
+        if(view()->exists('admin.index')){
+            $data = ['title' => 'Панель администратора'];
+            return view('admin.index', $data);
+        }
     });
 
-    Route::groupe(['prefix'=>'pages'], function(){
+    Route::group(['prefix'=>'pages'], function(){
 
         Route::get('/', ['uses'=>'PagesController@execute', 'as'=>'pages']);
         Route::match(['get', 'post'], '/add', ['uses'=>'PagesAddsController@execute', 'as'=>'pagesAdd']);
         Route::match(['get','post', 'delate'], '/edit/{page}', ['uses'=>'PagesEditController@execute', 'as'=>'pagesEdit']);
     });
 
-    Route::groupe(['prefix'=>'portfolios'], function(){
+    Route::group(['prefix'=>'portfolios'], function(){
 
         Route::get('/', ['uses'=>'PortfolioController@execute', 'as'=>'portfolio']);
         Route::match(['get', 'post'], '/add', ['uses'=>'PortfolioAddController@execute', 'as'=>'portfolioAdd']);
@@ -44,11 +47,14 @@ Route::group([], function(){
 
     });
 
-    Route::groupe(['prefix'=>'services'], function(){
+    Route::group(['prefix'=>'services'], function(){
 
         Route::get('/', ['uses'=>'ServiceController@execute', 'as'=>'service']);
         Route::match(['get', 'post'], '/add', ['uses'=>'ServiceAddController@execute', 'as'=>'serviceAdd']);
         Route::match(['get','post', 'delate'], '/edit/{portfolio}', ['uses'=>'ServiceEditController@execute', 'as'=>'serviceEdit']);
 
     });
-});*/
+});
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
