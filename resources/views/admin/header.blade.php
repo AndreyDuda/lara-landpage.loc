@@ -23,7 +23,7 @@
           </a>
 		</li>
 		
-		<li><a href="{{--{{route('services')}}--}}">
+		<li><a href="{{route('service')}}">
           <h5>Сервисы</h5>
           </a>
 		</li>
