@@ -11,6 +11,10 @@ class PagesAddController extends Controller
     //
     public function execute(Request $request){
 
+        if($validator->fails()){
+            return redirect()->route('pagesAdd')->withErrors($validator)->withInput();
+        }
+
         if( $request->isMethod('post') ){
            $input = $request->except('_token');
            $validator = Validator::make($input, [
@@ -18,10 +22,6 @@ class PagesAddController extends Controller
                'alias' => 'required|max:255|unique:pages',
                'text'  => 'required'
            ]);
-
-           if($validator->fails()){
-                return redirect()->route('pagesAdd')->withErrors($validator)->withInput();
-           }
 
            if($request->hasFile('images')){
                $file = $request->file('images');

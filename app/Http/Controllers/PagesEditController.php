@@ -11,7 +11,12 @@ class PagesEditController extends Controller
     //
     public function execute(Page $page, Request $request){
 
-        if($request->isMethod('post')){
+        if( $request->isMethod('delete') ){
+            $page->delete();
+            return redirect('admin')->with('status', 'Страница успешно удалена');
+        }
+
+        if( $request->isMethod('post') ){
             $input = $request->except('_token');
             $validator = Validator::make($input, [
                'name'  => 'required|max:255',
