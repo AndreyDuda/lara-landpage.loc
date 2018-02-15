@@ -29,7 +29,7 @@ class PagesEditController extends Controller
                     ->route('pagesEdit', [ 'page' => $input['id'] ] )
                     ->withErrors($validator);
             }
-            if($request->hasFile['images']){
+            if($request->file['images']){
                 $file = $request->file('images');
                 $file->move( public_path().'/assets/img', $file->getClientOriginalName() );
                 $input['images'] = $file->getClientOriginalName();

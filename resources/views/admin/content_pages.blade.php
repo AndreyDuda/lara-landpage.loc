@@ -20,7 +20,7 @@
                     <td>{{ $page->text }}</td>
                     <td>{{  $page->created_at }}</td>
                     <td>
-                        {!! Form::open(['url' => route('pagesEdit', ['page' => $page->id]), 'class' => 'form-horizontal', 'method' => 'post' ]) !!}
+                        {!! Form::open(['url' => route('pagesEdit', ['page' => $page->id]), 'class' => 'form-horizontal', 'file' => true, 'method' => 'post' ]) !!}
                             {{ method_field('delete') }}
                             {!! Form::button('Удалить', ['class' => 'btn btn-danger', 'type' => 'submit'])  !!}
                         {!! Form::close() !!}

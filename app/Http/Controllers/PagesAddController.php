@@ -6,14 +6,17 @@ use Illuminate\Http\Request;
 use App\Page;
 use Validator;
 
+use file;
+use Illuminate\Http\UploadedFile;
+use SplFileInfo;
+use App\Http\Requests\UploadRequest;
+
 class PagesAddController extends Controller
 {
     //
     public function execute(Request $request){
 
-        if($validator->fails()){
-            return redirect()->route('pagesAdd')->withErrors($validator)->withInput();
-        }
+
 
         if( $request->isMethod('post') ){
            $input = $request->except('_token');
@@ -22,13 +25,17 @@ class PagesAddController extends Controller
                'alias' => 'required|max:255|unique:pages',
                'text'  => 'required'
            ]);
+            if($validator->fails()){
+                return redirect()->route('pagesAdd')->withErrors($validator)->withInput();
+            }
 
            if($request->hasFile('images')){
+                dd( $request->file('images'));
                $file = $request->file('images');
                $input['images'] = $file->getClientOriginalName();
                $file->move(public_path() . '/assets/img', $input['images'] );
            }
-
+            dd($input);
            $page = new Page();
            $page->fill($input);
            if( $page->save() ){

@@ -1,5 +1,5 @@
 <div class="wrapper container-fluid">
-    {!! Form::open(['url' => route('pagesEdit',array('page'=>$data['id'])),'class'=>'form-horizontal','method'=>'POST','enctype'=>'multipart/form-data']) !!}
+    {!! Form::open(['url' => route('pagesEdit',array('page'=>$data['id'])),'class'=>'form-horizontal','method'=>'POST','enctype'=>'multipart/form-data', 'file' => true]) !!}
     <div class="form-group">
         {!! Form::hidden('id', $data['id']) !!}
         {!! Form::label('name', 'Название:',['class'=>'col-xs-2 control-label']) !!}
