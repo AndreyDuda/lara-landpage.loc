@@ -29,13 +29,13 @@ class PagesAddController extends Controller
                 return redirect()->route('pagesAdd')->withErrors($validator)->withInput();
             }
 
-           if($request->hasFile('images')){
-                dd( $request->file('images'));
-               $file = $request->file('images');
+           if($request->hasFile('image')){
+               /* dd( $request->file('images'));*/
+               $file = $request->file('image');
                $input['images'] = $file->getClientOriginalName();
                $file->move(public_path() . '/assets/img', $input['images'] );
            }
-            dd($input);
+            /*dd($input);*/
            $page = new Page();
            $page->fill($input);
            if( $page->save() ){
